@@ -4,12 +4,17 @@
 		<title>FooD Project</title>
 		
 		<script>
-                
+                var result
+                fetch('https://nominatim.openstreetmap.org/search?q=paris&format=json').then(
+                    function(response){
+                    response.json().then(function(data){result = data})
+                    }
+                )
     	</script>
 	
 	</head>
 	
-	<body onload="recup">
+	<body >
 		
 	</body>
 
