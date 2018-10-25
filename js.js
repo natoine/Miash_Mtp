@@ -16,3 +16,7 @@ fetch('https://github.com/openfoodfacts/cordova-app/blob/master/www/off.js').the
                     
                     }
                 )
+
+function calculerY(){
+	
+}				
