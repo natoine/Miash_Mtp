@@ -1,17 +1,23 @@
-let countries; //will contain "fetched" data
+var APPID = "7745381afecc0551b497ba87ea4e86d0"
+let countries; //will contain "fetched" country data
+let meteo; //will contain "fetched" weather data
 const countriesList = document.getElementById("countries");
 var identifier;
 var capital;
+var temperature;
 
 fetch("https://restcountries.eu/rest/v2/all")
 	.then(res=> res.json())
 	.then(data => initialize(data))
-	//.then(
 	.catch(err => console.log("Error:",err));
+
+/*fetch("http://api.openweathermap.org/data/2.5/weather?units=metric&appid=7745381afecc0551b497ba87ea4e86d0")
+    .then(res => res.json())
+	.then(data => ini_meteo(data))
+    .then(resJson => console.log(resJson.main.temp))*/
 
 function initialize(countriesData){
 	countries = countriesData;
-	let options = "";
 	countries.forEach(country => $('#countries').append(new Option(country.name, country.capital)));
 
     $(document).ready(function(){
@@ -20,9 +26,27 @@ function initialize(countriesData){
 
 }
 
-var id_select = document.getElementById("countries");
-var id_select = document.getElementById("informations");
+function ini_meteo(capital){
+	var url = "http://api.openweathermap.org/data/2.5/weather?units=metric"+ 
+	"&q=" + capital +
+	"&APPID=" + APPID;
+	sendRequest(url);
+}
 
+function sendRequest(url){
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
+			var data = JSON.parse(xmlhttp.responseText);
+
+			temperature = data.main.temp;
+			var meteo = document.getElementById('meteo');
+			meteo.innerHTML = temperature+"°C";
+		}
+	}
+	xmlhttp.open("GET", url, true);
+	xmlhttp.send();
+}
 
 function pull_info(id){
 	capital = id;
@@ -45,9 +69,10 @@ function pull_info(id){
 				langue += i.name+"\n";
 			});
 			
+			
 			if (document.getElementById('capital').childNodes.length == 3){
 				
-				
+				ini_meteo(capital);
 				var tr_capital = document.getElementById('capital');
 				var td_capital = document.createElement('td');
 				var td_content_capital = document.createTextNode(capital);
@@ -77,7 +102,9 @@ function pull_info(id){
 				var td_content_langue = document.createTextNode(langue);
 				td_langue.appendChild(td_content_langue);
 				tr_langue.appendChild(td_langue);
+				
 			} else {
+				ini_meteo(capital);
 				var tr_capital = document.getElementById('capital');
 				var next_capital = tr_capital.lastChild;
 				next_capital.innerHTML = capital;
@@ -97,6 +124,7 @@ function pull_info(id){
 				var tr_langue = document.getElementById('languages');
 				var next_langue = tr_langue.lastChild;
 				next_langue.innerHTML = langue;
+
 			}
 		}
 	}
