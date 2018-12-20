@@ -23,7 +23,7 @@ function initialize(countriesData){
 	countries = countriesData;
 	let options = "";
 	countries.forEach(country => $('#countries').append(new Option(country.name, country.alpha3Code)));
-	//$(document).ready(function(){
-		//$('#countries').formSelect();
-	//});
+	$(document).ready(function(){
+		$('#countries').formSelect();
+	});
 }
