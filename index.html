@@ -49,18 +49,27 @@
         </div>
         
         <div class="input-field col s12">
-    <select>
-      <option value="" disabled selected>Choisis ton pays</option>
-      <option value="1">Option 1</option>
-      <option value="2">Option 2</option>
-      <option value="3">Option 3</option>
-    </select>
-    <label>Sélection du pays</label>
-            
-        <div class="container orange lighten-3">
-        <!-- Page Content goes here -->
-            Bla bla affichage résultat
-      </div>
+			<select id="countries">
+				  <option value="" disabled selected>Choisis ton pays</option>
+				  <option value="1">Option 1</option>
+				  <option value="2">Option 2</option>
+				  <option value="3">Option 3</option>
+			</select>
+			<label>Sélection du pays</label>
+					
+				<div class="container orange lighten-3" id ="result">
+				<!-- Page Content goes here -->
+					<div id="informations" />
+						<p>Vrai nom: <span id="nativeName"></span></p>
+						<p>Capital: <span id="capital"></span></p>
+						<p>Continent: <span id="region"></span></p>
+						<p>Monnaie(s): <span id="currencies"></span></p>
+						<p>Langues: <span id="languages"></span></p>
+					</div>
+					<div id="drapeau" />
+						
+					</div>
+			  </div>
         </div>
       <!--JavaScript at end of body for optimized loading-->
       <script type="text/javascript" src="java.js"></script>
