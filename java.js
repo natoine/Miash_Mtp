@@ -27,7 +27,7 @@ function initialize(countriesData){
 }
 
 function ini_meteo(capital){
-	var url = "http://api.openweathermap.org/data/2.5/weather?units=metric"+ 
+	var url = "https://api.openweathermap.org/data/2.5/weather?units=metric"+ 
 	"&q=" + capital +
 	"&APPID=" + APPID;
 	sendRequest(url);
